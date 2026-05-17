@@ -92,3 +92,5 @@ Permite gestionar y visualizar productos, filtrarlos por categorías, realizar b
 ```bash id="backend_run"
 cd backend
 node index.js
+
+Proyecto actualizado y funcional con API REST integrada.
