@@ -94,3 +94,4 @@ cd backend
 node index.js
 
 Proyecto actualizado y funcional con API REST integrada.
+Se confirma funcionamiento de carrito y categorías.
