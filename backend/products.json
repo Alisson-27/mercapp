@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nombre": "Laptop",
+    "precio": 1200,
+    "categoryId": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+  },
+  {
+    "id": 2,
+    "nombre": "Mouse",
+    "precio": 25,
+    "categoryId": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1527814050087-3793815479db"
+  },
+  {
+    "id": 3,
+    "nombre": "Teclado",
+    "precio": 45,
+    "categoryId": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4"
+  },
+{
+  "id": 4,
+  "nombre": "Sofá Gamer",
+  "precio": 300,
+  "categoryId": 2,
+  "imageUrl": "https://nomadaware.com.ec/wp-content/uploads/NomadaWare_sofa_cougar_ranger_s_royal-1.jpg"
+}
+]
