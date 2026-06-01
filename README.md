@@ -1,7 +1,30 @@
-# MercApp - Proyecto Unidad 3 listo para Unidad 4
+# 🛒 MercApp - Catálogo de Productos SPA
 
-MercApp es una SPA de catalogo y carrito desarrollada con Vue 3 en el frontend y Node.js + Express en el backend. Para la Unidad 4 queda preparada para desplegarse con MongoDB Atlas, Railway, Netlify y GitHub Pages.
+---
 
+## 📌 Información del Proyecto
+
+**Estudiante:**  
+Alisson Alejandra Herrera Garzón  
+
+**Universidad:**  
+Universidad Politécnica Salesiana  
+
+**Carrera:**  
+Ingeniería de Software  
+
+**Asignatura:**  
+Aplicaciones Web - Tarea Unidad 4  
+
+---
+
+## 📖 Descripción
+
+MercApp es una aplicación web tipo **tienda en línea (SPA - Single Page Application)** desarrollada con Vue 3 en el frontend y Node.js con Express en el backend.
+
+Permite gestionar y visualizar productos, filtrarlos por categorías, realizar búsquedas y simular un carrito de compras con persistencia local.
+
+---
 ## Tecnologias
 
 - Vue 3 + Vue Router + Pinia
@@ -14,11 +37,28 @@ MercApp es una SPA de catalogo y carrito desarrollada con Vue 3 en el frontend y
 
 ## Estructura
 
-```text
-backend/   API REST, modelos Mongoose y fallback JSON local
-frontend/  SPA Vue 3
-docs/      micrositio para GitHub Pages y guia de entrega
-```
+
+## Estructura del proyecto
+
+```txt
+mercapp/
+├── backend/        API REST, modelos Mongoose y rutas
+├── frontend/       SPA desarrollada con Vue 3
+├── docs/           Micrositio para GitHub Pages
+├── README.md
+├── readme.txt
+├── package.json
+└── .gitignore
+
+## 🚀 Funcionalidades
+
+- ✔ Listado de productos desde API
+- ✔ Búsqueda de productos en tiempo real
+- ✔ Filtro por categorías
+- ✔ Carrito de compras funcional
+- ✔ Persistencia del carrito en localStorage
+- ✔ Registro y login de usuarios
+- ✔ API REST propia
 
 ## Ejecucion local
 
@@ -80,14 +120,3 @@ Frontend:
 VITE_API_URL=http://localhost:3000
 ```
 
-En Netlify, `VITE_API_URL` debe apuntar a la URL publica de Railway.
-
-## Despliegue Unidad 4
-
-El paso a paso completo esta en [docs/UNIDAD4_PASO_A_PASO.md](docs/UNIDAD4_PASO_A_PASO.md).
-
-Cuando publiques:
-
-- Backend Railway: pega aqui la URL final.
-- Frontend Netlify: pega aqui la URL final.
-- Micrositio GitHub Pages: pega aqui la URL final.
