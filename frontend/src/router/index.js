@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-// Vistas (lazy loading recomendado para la rúbrica)
 const HomeView = () => import('../views/HomeView.vue')
 const ProductDetail = () => import('../views/ProductDetail.vue')
 const CartView = () => import('../views/CartView.vue')
@@ -11,10 +10,6 @@ const AdminProducts = () => import('../views/AdminProducts.vue')
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    {
-    path: '/admin',
-      component: AdminProducts
-    },
     {
       path: '/',
       name: 'home',
@@ -29,6 +24,11 @@ const router = createRouter({
       path: '/cart',
       name: 'cart',
       component: CartView
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminProducts
     },
     {
       path: '/about',

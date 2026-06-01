@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "backend": "npm --prefix backend run dev",
+    "frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build"
+  },
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1"

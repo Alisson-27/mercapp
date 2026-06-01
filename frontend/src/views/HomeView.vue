@@ -1,158 +1,120 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import axios from 'axios'
+import { getProducts, getCategories } from '../services/api'
 
 const products = ref([])
 const categories = ref([])
 const search = ref('')
 const selectedCategory = ref('')
-const cart = ref(JSON.parse(localStorage.getItem("cart")) || [])
+const cart = ref(JSON.parse(localStorage.getItem('cart')) || [])
+const loading = ref(true)
+const error = ref('')
 
-/* =========================
-   LOAD DATA
-========================= */
 onMounted(async () => {
-  const resP = await axios.get('http://localhost:3000/productos')
-  products.value = resP.data
+  try {
+    const [productsResponse, categoriesResponse] = await Promise.all([
+      getProducts(),
+      getCategories()
+    ])
 
-  const resC = await axios.get('http://localhost:3000/categorias')
-  categories.value = resC.data
-
-  console.log("PRODUCTOS:", resP.data)
-  console.log("CATEGORIAS:", resC.data)
+    products.value = productsResponse.data
+    categories.value = categoriesResponse.data
+  } catch (_err) {
+    error.value = 'No se pudieron cargar los productos. Revisa que el backend este activo.'
+  } finally {
+    loading.value = false
+  }
 })
 
-/* =========================
-   CART
-========================= */
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cart.value))
+}
+
 function addToCart(product) {
   cart.value.push(product)
-  localStorage.setItem("cart", JSON.stringify(cart.value))
+  saveCart()
 }
 
 function removeFromCart(index) {
   cart.value.splice(index, 1)
-  localStorage.setItem("cart", JSON.stringify(cart.value))
+  saveCart()
 }
 
 function checkout() {
-  alert("Pago realizado 💰")
+  alert('Pago realizado')
   cart.value = []
-  localStorage.removeItem("cart")
+  localStorage.removeItem('cart')
 }
 
-/* =========================
-   FILTER
-========================= */
 const filteredProducts = computed(() => {
-  return products.value.filter(p => {
-    const matchSearch = p.nombre
+  return products.value.filter(product => {
+    const matchSearch = product.nombre
       .toLowerCase()
       .includes(search.value.toLowerCase())
 
     const matchCategory =
       selectedCategory.value === '' ||
-      p.categoryId == selectedCategory.value
+      product.categoryId == selectedCategory.value
 
     return matchSearch && matchCategory
   })
 })
 
-/* TOTAL */
 const total = computed(() =>
-  cart.value.reduce((sum, p) => sum + p.precio, 0)
+  cart.value.reduce((sum, product) => sum + Number(product.precio), 0)
 )
 </script>
 
 <template>
-  <div class="container">
+  <main class="container">
+    <section class="toolbar">
+      <h1>MercApp</h1>
 
-    <h1>🛒 MercApp</h1>
+      <div class="filters">
+        <input v-model="search" placeholder="Buscar productos..." />
 
-    <!-- SEARCH -->
-    <input v-model="search" placeholder="Buscar productos..." />
+        <select v-model="selectedCategory">
+          <option value="">Todas las categorias</option>
+          <option v-for="category in categories" :key="category.id" :value="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
+    </section>
 
-    <!-- CATEGORY -->
-    <select v-model="selectedCategory">
-      <option value="">Todas las categorías</option>
-      <option v-for="c in categories" :key="c.id" :value="c.id">
-        {{ c.name }}
-      </option>
-    </select>
+    <p v-if="loading">Cargando productos...</p>
+    <p v-else-if="error" class="error">{{ error }}</p>
 
-    <hr />
+    <section v-else class="products">
+      <article v-for="product in filteredProducts" :key="product.id" class="card">
+        <img :src="product.imageUrl" :alt="product.nombre" class="product-img" />
 
-    <!-- PRODUCTS -->
-   <div v-for="p in filteredProducts" :key="p.id" class="card">
+        <h3>{{ product.nombre }}</h3>
+        <p>${{ product.precio }}</p>
 
-  <img
-    :src="p.imageUrl"
-    alt="producto"
-    class="product-img"
-  />
+        <button @click="addToCart(product)">
+          Agregar al carrito
+        </button>
+      </article>
+    </section>
 
-  <h3>{{ p.nombre }}</h3>
-  <p>${{ p.precio }}</p>
+    <section class="cart">
+      <h2>Carrito</h2>
 
-  <button @click="addToCart(p)">
-    Agregar al carrito
-  </button>
+      <p v-if="cart.length === 0">
+        El carrito esta vacio
+      </p>
 
-</div>
+      <div v-for="(item, index) in cart" :key="`${item.id}-${index}`" class="cart-item">
+        <span>{{ item.nombre }} - ${{ item.precio }}</span>
+        <button @click="removeFromCart(index)">Eliminar</button>
+      </div>
 
-    <hr />
+      <h3>Total: ${{ total }}</h3>
 
-    <!-- CART -->
-    <h2>Carrito 🛒</h2>
-
-    <div v-if="cart.length === 0">
-      El carrito está vacío
-    </div>
-
-    <div v-for="(item, i) in cart" :key="i" class="card">
-      {{ item.nombre }} - ${{ item.precio }}
-      <button @click="removeFromCart(i)">Eliminar</button>
-    </div>
-
-    <h3>Total: ${{ total }}</h3>
-
-    <button v-if="cart.length > 0" @click="checkout">
-      Pagar 💰
-    </button>
-
-  </div>
+      <button v-if="cart.length > 0" @click="checkout">
+        Pagar
+      </button>
+    </section>
+  </main>
 </template>
-
-<style>
-.container {
-  padding: 20px;
-  font-family: Arial;
-  background: #0f172a;
-  min-height: 100vh;
-  color: white;
-}
-
-.card {
-  background: #111827;
-  color: white;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 12px;
-  max-width: 300px;
-}
-
-.product-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-input, select {
-  padding: 8px;
-  margin: 5px;
-  border-radius: 6px;
-  border: none;
-}
-</style>

@@ -8,68 +8,81 @@ import {
 } from '../services/api'
 
 const products = ref([])
+const error = ref('')
 
-const form = ref({
+const emptyForm = {
   id: null,
   nombre: '',
-  precio: 0
-})
+  precio: 0,
+  categoryId: 1,
+  imageUrl: ''
+}
 
-// 📦 cargar productos
+const form = ref({ ...emptyForm })
+
 const loadProducts = async () => {
-  const res = await getProducts()
-  products.value = res.data
+  const response = await getProducts()
+  products.value = response.data
 }
 
 onMounted(loadProducts)
 
-// ➕ guardar (crear o editar)
 const saveProduct = async () => {
-  if (form.value.id) {
-    await updateProduct(form.value.id, form.value)
-  } else {
-    await createProduct(form.value)
+  try {
+    error.value = ''
+
+    if (form.value.id) {
+      await updateProduct(form.value.id, form.value)
+    } else {
+      await createProduct(form.value)
+    }
+
+    form.value = { ...emptyForm }
+    await loadProducts()
+  } catch (_err) {
+    error.value = 'No se pudo guardar el producto.'
   }
-
-  form.value = { id: null, nombre: '', precio: 0 }
-  loadProducts()
 }
 
-// ✏️ editar
-const editProduct = (p) => {
-  form.value = { ...p }
+const editProduct = (product) => {
+  form.value = { ...product }
 }
 
-// ❌ eliminar
 const removeProduct = async (id) => {
   await deleteProduct(id)
-  loadProducts()
+  await loadProducts()
 }
 </script>
 
 <template>
-  <div>
-    <h1>🛠 Admin Productos</h1>
+  <main class="admin">
+    <h1>Admin Productos</h1>
 
-    <!-- FORMULARIO -->
-    <div class="form">
+    <section class="form">
       <input v-model="form.nombre" placeholder="Nombre" />
-      <input v-model="form.precio" type="number" placeholder="Precio" />
+      <input v-model.number="form.precio" type="number" min="0" placeholder="Precio" />
+      <input v-model.number="form.categoryId" type="number" min="1" max="3" placeholder="Categoria" />
+      <input v-model="form.imageUrl" placeholder="URL de imagen" />
 
       <button @click="saveProduct">
         {{ form.id ? 'Actualizar' : 'Crear' }}
       </button>
-    </div>
+    </section>
 
-    <hr />
+    <p v-if="error" class="error">{{ error }}</p>
 
-    <!-- LISTA -->
-    <div v-for="p in products" :key="p.id">
-      <h3>{{ p.nombre }}</h3>
-      <p>${{ p.precio }}</p>
+    <section class="admin-list">
+      <article v-for="product in products" :key="product.id" class="admin-item">
+        <div>
+          <h3>{{ product.nombre }}</h3>
+          <p>${{ product.precio }}</p>
+        </div>
 
-      <button @click="editProduct(p)">Editar</button>
-      <button @click="removeProduct(p.id)">Eliminar</button>
-    </div>
-  </div>
+        <div class="actions">
+          <button @click="editProduct(product)">Editar</button>
+          <button @click="removeProduct(product.id)">Eliminar</button>
+        </div>
+      </article>
+    </section>
+  </main>
 </template>

@@ -1,24 +1,30 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import api from '../services/api'
+import { getProduct } from '../services/api'
 
 const route = useRoute()
 const product = ref(null)
+const error = ref('')
 
 onMounted(async () => {
-  const res = await api.get(`/productos`)
-  product.value = res.data.find(p => p.id == route.params.id)
+  try {
+    const response = await getProduct(route.params.id)
+    product.value = response.data
+  } catch (_err) {
+    error.value = 'Producto no encontrado.'
+  }
 })
 </script>
 
 <template>
-  <div v-if="product">
-    <h1>{{ product.nombre }}</h1>
-    <p>Precio: ${{ product.precio }}</p>
+  <main class="detail">
+    <p v-if="error" class="error">{{ error }}</p>
 
-    <button>
-      Agregar al carrito
-    </button>
-  </div>
+    <article v-else-if="product" class="card">
+      <img v-if="product.imageUrl" :src="product.imageUrl" :alt="product.nombre" class="product-img" />
+      <h1>{{ product.nombre }}</h1>
+      <p>Precio: ${{ product.precio }}</p>
+    </article>
+  </main>
 </template>

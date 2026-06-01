@@ -10,7 +10,7 @@ export function useProducts() {
     loading.value = true
 
     try {
-      const response = await api.get('/productos') // 👈 AQUÍ el cambio
+      const response = await api.get('/productos')
       products.value = response.data
     } catch (err) {
       error.value = 'Error cargando productos'

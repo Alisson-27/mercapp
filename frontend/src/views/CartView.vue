@@ -1,26 +1,29 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const cart = ref(JSON.parse(localStorage.getItem("cart")) || [])
+const cart = ref(JSON.parse(localStorage.getItem('cart')) || [])
 
 function remove(index) {
   cart.value.splice(index, 1)
-  localStorage.setItem("cart", JSON.stringify(cart.value))
+  localStorage.setItem('cart', JSON.stringify(cart.value))
 }
 
-const total = () =>
-  cart.value.reduce((sum, p) => sum + p.precio, 0)
+const total = computed(() =>
+  cart.value.reduce((sum, product) => sum + Number(product.precio), 0)
+)
 </script>
 
 <template>
-  <div>
-    <h1>🛒 Carrito</h1>
+  <main class="cart-page">
+    <h1>Carrito</h1>
 
-    <div v-for="(item, i) in cart" :key="i">
-      {{ item.nombre }} - ${{ item.precio }}
-      <button @click="remove(i)">Eliminar</button>
+    <p v-if="cart.length === 0">El carrito esta vacio</p>
+
+    <div v-for="(item, index) in cart" :key="`${item.id}-${index}`" class="cart-item">
+      <span>{{ item.nombre }} - ${{ item.precio }}</span>
+      <button @click="remove(index)">Eliminar</button>
     </div>
 
-    <h3>Total: ${{ total() }}</h3>
-  </div>
+    <h3>Total: ${{ total }}</h3>
+  </main>
 </template>

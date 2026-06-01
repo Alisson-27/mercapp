@@ -9,7 +9,7 @@ export function useCategories() {
       const res = await api.get('/categorias')
       categories.value = res.data
     } catch (err) {
-      console.error('Error categorías', err)
+      console.error('Error categorias', err)
     }
   }
 

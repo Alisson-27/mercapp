@@ -1,6 +1,6 @@
 <template>
-  <div>
+  <main class="container">
     <h1>404</h1>
-    <p>Página no encontrada</p>
-  </div>
+    <p>Pagina no encontrada.</p>
+  </main>
 </template>

@@ -1,97 +1,93 @@
-# 🛒 MercApp - Catálogo de Productos SPA
+# MercApp - Proyecto Unidad 3 listo para Unidad 4
 
----
+MercApp es una SPA de catalogo y carrito desarrollada con Vue 3 en el frontend y Node.js + Express en el backend. Para la Unidad 4 queda preparada para desplegarse con MongoDB Atlas, Railway, Netlify y GitHub Pages.
 
-## 📌 Información del Proyecto
+## Tecnologias
 
-**Estudiante:**  
-Alisson Alejandra Herrera Garzón  
-
-**Universidad:**  
-Universidad Politécnica Salesiana  
-
-**Carrera:**  
-Ingeniería de Software  
-
-**Asignatura:**  
-Aplicaciones Web - Tarea Unidad 3  
-
----
-
-## 📖 Descripción
-
-MercApp es una aplicación web tipo **tienda en línea (SPA - Single Page Application)** desarrollada con Vue 3 en el frontend y Node.js con Express en el backend.
-
-Permite gestionar y visualizar productos, filtrarlos por categorías, realizar búsquedas y simular un carrito de compras con persistencia local.
-
----
-
-## 🧠 Arquitectura del Proyecto
-
-### 🔵 Frontend (Vue 3)
-- Interfaz de usuario dinámica
-- Consumo de API REST
-- Manejo de carrito con LocalStorage
-- Filtros y búsqueda reactiva
-- Vue Router para navegación SPA
-
-### 🟢 Backend (Node.js + Express)
-- API REST propia
-- Gestión de productos y usuarios
-- Persistencia en archivos JSON
-- Endpoints para CRUD básico
-
----
-
-## ⚙️ Tecnologías Utilizadas
-
-- Vue 3 (Composition API)
-- Vue Router
-- Node.js
-- Express.js
+- Vue 3 + Vue Router + Pinia
+- Node.js + Express
+- MongoDB Atlas con Mongoose
 - Axios
-- JavaScript (ES6+)
-- HTML5 + CSS3
-- LocalStorage
+- Railway para backend
+- Netlify para frontend
+- GitHub Pages para micrositio
 
----
+## Estructura
 
-## 🚀 Funcionalidades
+```text
+backend/   API REST, modelos Mongoose y fallback JSON local
+frontend/  SPA Vue 3
+docs/      micrositio para GitHub Pages y guia de entrega
+```
 
-- ✔ Listado de productos desde API
-- ✔ Búsqueda de productos en tiempo real
-- ✔ Filtro por categorías
-- ✔ Carrito de compras funcional
-- ✔ Persistencia del carrito en localStorage
-- ✔ Registro y login de usuarios
-- ✔ API REST propia
+## Ejecucion local
 
----
+1. Instalar dependencias:
 
-## 📡 Endpoints del API
+```bash
+npm install
+npm --prefix backend install
+npm --prefix frontend install
+```
 
-### Productos
-- GET `/productos`
-- GET `/productos/:id`
-- POST `/productos`
-- DELETE `/productos/:id`
+2. Crear variables de entorno:
 
-### Categorías
-- GET `/categorias`
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+```
 
-### Autenticación
-- POST `/register`
-- POST `/login`
+3. Ejecutar backend:
 
----
+```bash
+npm --prefix backend run dev
+```
 
-## ▶️ Cómo ejecutar el proyecto
+4. Ejecutar frontend en otra terminal:
 
-### 🔵 Backend
+```bash
+npm --prefix frontend run dev
+```
 
-```bash id="backend_run"
-cd backend
-node index.js
+Si `MONGODB_URI` no esta configurada, el backend usa `backend/products.json` y `backend/user.json` para desarrollo local.
 
-Proyecto actualizado y funcional con API REST integrada.
-Se confirma funcionamiento de carrito y categorías.
+## Endpoints
+
+- `GET /` estado de la API
+- `GET /productos` listar productos
+- `GET /productos/:id` obtener producto
+- `POST /productos` crear producto
+- `PUT /productos/:id` actualizar producto
+- `DELETE /productos/:id` eliminar producto
+- `GET /categorias` listar categorias
+- `POST /auth/register` registrar usuario
+- `POST /auth/login` iniciar sesion
+
+## Variables de entorno
+
+Backend:
+
+```env
+PORT=3000
+MONGODB_URI=mongodb+srv://USUARIO:PASSWORD@CLUSTER.mongodb.net/mercapp?retryWrites=true&w=majority
+CORS_ORIGIN=http://localhost:5173,https://TU-SITIO.netlify.app
+JWT_SECRET=cambia-este-secreto
+```
+
+Frontend:
+
+```env
+VITE_API_URL=http://localhost:3000
+```
+
+En Netlify, `VITE_API_URL` debe apuntar a la URL publica de Railway.
+
+## Despliegue Unidad 4
+
+El paso a paso completo esta en [docs/UNIDAD4_PASO_A_PASO.md](docs/UNIDAD4_PASO_A_PASO.md).
+
+Cuando publiques:
+
+- Backend Railway: pega aqui la URL final.
+- Frontend Netlify: pega aqui la URL final.
+- Micrositio GitHub Pages: pega aqui la URL final.
