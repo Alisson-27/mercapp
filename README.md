@@ -103,20 +103,24 @@ Si `MONGODB_URI` no esta configurada, el backend usa `backend/products.json` y `
 - `POST /auth/register` registrar usuario
 - `POST /auth/login` iniciar sesion
 
-## Variables de entorno
+## URLs de despliegue
 
-Backend:
+- Repositorio GitHub: https://github.com/Alisson-27/mercapp
+- Backend Railway: https://mercapp-production-ba3d.up.railway.app
+- Health Check: https://mercapp-production-ba3d.up.railway.app/health
+- Productos API: https://mercapp-production-ba3d.up.railway.app/productos
+- Frontend Netlify: https://mercappv4.netlify.app
+- GitHub Pages: https://alisson-27.github.io/mercapp/
+
+## Variables de entorno en producción
+
+### Railway
 
 ```env
+MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/mercapp
 PORT=3000
-MONGODB_URI=mongodb+srv://USUARIO:PASSWORD@CLUSTER.mongodb.net/mercapp?retryWrites=true&w=majority
-CORS_ORIGIN=http://localhost:5173,https://TU-SITIO.netlify.app
-JWT_SECRET=cambia-este-secreto
-```
+FRONTEND_URL=https://mercappv4.netlify.app
+CORS_ORIGIN=https://mercappv4.netlify.app
+JWT_SECRET=clave_secreta
 
-Frontend:
-
-```env
-VITE_API_URL=http://localhost:3000
-```
-
+VITE_API_URL=https://mercapp-production-ba3d.up.railway.app
