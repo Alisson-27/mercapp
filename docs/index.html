@@ -1,146 +1,245 @@
-<header>
-  <h1>MercApp - Unidad 4</h1>
-  <p>Despliegue y publicación de aplicación web SPA + API propia</p>
-</header>
+<link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MercApp - Unidad 4</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-<section>
-  <h2>Datos del proyecto</h2>
-  <ul>
-    <li><strong>Estudiante:</strong> Alisson Alejandra Herrera Garzón</li>
-    <li><strong>Universidad:</strong> Universidad Politécnica Salesiana</li>
-    <li><strong>Asignatura:</strong> Aplicaciones Web</li>
-    <li><strong>Unidad:</strong> Unidad 4 - Despliegue y publicación de aplicaciones</li>
-    <li><strong>Proyecto:</strong> MercApp</li>
-  </ul>
-</section>
+  <header class="hero">
+    <div class="container">
+      <h1>MercApp - Unidad 4</h1>
+      <p>Despliegue y publicación de aplicación web SPA + API propia</p>
+    </div>
+  </header>
 
-<section>
-  <h2>Resumen técnico</h2>
-  <p>
-    MercApp es una aplicación web tipo SPA desarrollada con Vue 3 y Vite para el frontend,
-    y Node.js con Express para el backend. El sistema permite visualizar productos,
-    filtrar por categorías y gestionar productos mediante operaciones CRUD.
-  </p>
-  <p>
-    La base de datos se encuentra alojada en MongoDB Atlas, el backend fue desplegado
-    en Railway, el frontend fue desplegado en Netlify y este micrositio se publica
-    mediante GitHub Pages.
-  </p>
-</section>
+  <main class="container">
 
-<section>
-  <h2>Arquitectura de despliegue</h2>
-  <ul>
-    <li><strong>Frontend:</strong> Netlify</li>
-    <li><strong>Backend/API:</strong> Railway</li>
-    <li><strong>Base de datos:</strong> MongoDB Atlas</li>
-    <li><strong>Repositorio:</strong> GitHub</li>
-    <li><strong>Micrositio:</strong> GitHub Pages</li>
-  </ul>
-</section>
+    <section class="card">
+      <h2>Datos del proyecto</h2>
+      <ul>
+        <li><strong>Estudiante:</strong> Alisson Alejandra Herrera Garzón</li>
+        <li><strong>Universidad:</strong> Universidad Politécnica Salesiana</li>
+        <li><strong>Asignatura:</strong> Aplicaciones Web</li>
+        <li><strong>Unidad:</strong> Unidad 4 - Despliegue y publicación de aplicaciones</li>
+        <li><strong>Proyecto:</strong> MercApp</li>
+      </ul>
+    </section>
 
-<section>
-  <h2>Enlaces públicos</h2>
-  <ul>
-    <li><a href="https://github.com/Alisson-27/mercapp" target="_blank">Repositorio GitHub</a></li>
-    <li><a href="https://mercappv4.netlify.app" target="_blank">Frontend en Netlify</a></li>
-    <li><a href="https://mercapp-production-ba3d.up.railway.app" target="_blank">Backend en Railway</a></li>
-    <li><a href="https://mercapp-production-ba3d.up.railway.app/health" target="_blank">Health Check API</a></li>
-    <li><a href="https://mercapp-production-ba3d.up.railway.app/productos" target="_blank">Endpoint Productos</a></li>
-    <li><a href="https://alisson-27.github.io/mercapp/" target="_blank">GitHub Pages</a></li>
-  </ul>
-</section>
+    <section class="card">
+      <h2>Resumen técnico</h2>
+      <p>
+        MercApp es una aplicación web tipo SPA desarrollada con Vue 3 y Vite para el frontend,
+        y Node.js con Express para el backend. El sistema permite visualizar productos,
+        filtrar por categorías, agregar productos al carrito y gestionar productos mediante
+        operaciones CRUD.
+      </p>
+      <p>
+        La base de datos se encuentra alojada en MongoDB Atlas. El backend fue desplegado
+        en Railway, el frontend fue desplegado en Netlify y este micrositio se publica
+        mediante GitHub Pages desde la carpeta <code>/docs</code> del repositorio.
+      </p>
+    </section>
 
-<section>
-  <h2>Guía de ejecución local</h2>
+    <section class="card">
+      <h2>Arquitectura de despliegue</h2>
 
-  <h3>Backend</h3>
-  <pre><code>cd backend
+      <div class="architecture">
+        <div class="arch-box">
+          <h3>Frontend</h3>
+          <p>Vue 3 + Vite</p>
+          <span>Netlify</span>
+        </div>
+
+        <div class="arch-arrow">→</div>
+
+        <div class="arch-box">
+          <h3>Backend</h3>
+          <p>Node.js + Express</p>
+          <span>Railway</span>
+        </div>
+
+        <div class="arch-arrow">→</div>
+
+        <div class="arch-box">
+          <h3>Base de datos</h3>
+          <p>MongoDB Atlas</p>
+          <span>Cluster M0</span>
+        </div>
+      </div>
+
+      <ul class="architecture-list">
+        <li><strong>Repositorio:</strong> GitHub</li>
+        <li><strong>Micrositio:</strong> GitHub Pages</li>
+        <li><strong>Variables de entorno:</strong> Railway y Netlify</li>
+        <li><strong>Comunicación:</strong> Frontend consume la API pública desplegada en Railway</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Enlaces públicos</h2>
+      <div class="links-grid">
+        <a href="https://github.com/Alisson-27/mercapp" target="_blank">
+          Repositorio GitHub
+        </a>
+
+        <a href="https://mercappv4.netlify.app" target="_blank">
+          Frontend en Netlify
+        </a>
+
+        <a href="https://mercapp-production-ba3d.up.railway.app" target="_blank">
+          Backend en Railway
+        </a>
+
+        <a href="https://mercapp-production-ba3d.up.railway.app/health" target="_blank">
+          Health Check API
+        </a>
+
+        <a href="https://mercapp-production-ba3d.up.railway.app/productos" target="_blank">
+          Endpoint Productos
+        </a>
+
+        <a href="https://alisson-27.github.io/mercapp/" target="_blank">
+          GitHub Pages
+        </a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Guía breve de ejecución local</h2>
+
+      <h3>Backend</h3>
+      <pre><code>cd backend
 npm install
 npm start</code></pre>
 
-  <h3>Frontend</h3>
-  <pre><code>cd frontend
+      <p>
+        El backend se ejecuta localmente en:
+      </p>
+
+      <pre><code>http://localhost:3000</code></pre>
+
+      <h3>Frontend</h3>
+      <pre><code>cd frontend
 npm install
 npm run dev</code></pre>
 
-  <h3>Variables de entorno del backend</h3>
-  <pre><code>PORT=3000
+      <p>
+        El frontend se ejecuta localmente en:
+      </p>
+
+      <pre><code>http://localhost:5173</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Variables de entorno</h2>
+
+      <h3>Backend - Railway o entorno local</h3>
+      <pre><code>PORT=3000
 MONGODB_URI=mongodb+srv://usuario:password@cluster.mongodb.net/mercapp
-FRONTEND_URL=http://localhost:5173
+FRONTEND_URL=https://mercappv4.netlify.app
+CORS_ORIGIN=https://mercappv4.netlify.app
 JWT_SECRET=clave_secreta</code></pre>
 
-  <h3>Variables de entorno del frontend</h3>
-  <pre><code>VITE_API_URL=http://localhost:3000</code></pre>
-</section>
+      <h3>Frontend - Netlify</h3>
+      <pre><code>VITE_API_URL=https://mercapp-production-ba3d.up.railway.app</code></pre>
 
-<section>
-  <h2>Endpoints principales</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Método</th>
-        <th>Ruta</th>
-        <th>Descripción</th>
-        <th>Ejemplo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>GET</td>
-        <td>/</td>
-        <td>Información general de la API</td>
-        <td>Estado y base de datos activa</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/health</td>
-        <td>Verifica el estado de salud de la API</td>
-        <td>{"status":"ok"}</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/productos</td>
-        <td>Lista todos los productos</td>
-        <td>[{"nombre":"Mouse","precio":25}]</td>
-      </tr>
-      <tr>
-        <td>POST</td>
-        <td>/productos</td>
-        <td>Crea un producto</td>
-        <td>{"nombre":"Producto prueba","precio":77}</td>
-      </tr>
-      <tr>
-        <td>PUT</td>
-        <td>/productos/:id</td>
-        <td>Actualiza un producto por ID</td>
-        <td>{"nombre":"Producto actualizado","precio":88}</td>
-      </tr>
-      <tr>
-        <td>DELETE</td>
-        <td>/productos/:id</td>
-        <td>Elimina un producto por ID</td>
-        <td>{"message":"Producto eliminado"}</td>
-      </tr>
-      <tr>
-        <td>GET</td>
-        <td>/categorias</td>
-        <td>Lista categorías disponibles</td>
-        <td>[{"id":1,"name":"Tecnologia"}]</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+      <p class="note">
+        Nota: Las credenciales reales no se versionan en GitHub. El repositorio incluye archivos
+        <code>.env.example</code> sin datos sensibles.
+      </p>
+    </section>
 
-<section>
-  <h2>Checklist de despliegue</h2>
-  <ul>
-    <li>MongoDB Atlas configurado y probado con Compass.</li>
-    <li>Backend desplegado en Railway con variables de entorno.</li>
-    <li>Endpoint /health validado en producción.</li>
-    <li>CRUD de productos probado en producción.</li>
-    <li>Frontend desplegado en Netlify con VITE_API_URL.</li>
-    <li>CORS configurado para permitir el dominio de Netlify.</li>
-    <li>Micrositio publicado en GitHub Pages.</li>
-  </ul>
-</section>
+    <section class="card">
+      <h2>Endpoints principales</h2>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Método</th>
+              <th>Ruta</th>
+              <th>Descripción</th>
+              <th>Ejemplo de request/response</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GET</td>
+              <td>/</td>
+              <td>Información general de la API</td>
+              <td><code>{"name":"MercApp API","status":"ok"}</code></td>
+            </tr>
+
+            <tr>
+              <td>GET</td>
+              <td>/health</td>
+              <td>Verifica el estado de salud de la API</td>
+              <td><code>{"status":"ok","database":"mongodb"}</code></td>
+            </tr>
+
+            <tr>
+              <td>GET</td>
+              <td>/productos</td>
+              <td>Lista todos los productos</td>
+              <td><code>[{"nombre":"Mouse","precio":25}]</code></td>
+            </tr>
+
+            <tr>
+              <td>POST</td>
+              <td>/productos</td>
+              <td>Crea un nuevo producto</td>
+              <td><code>{"nombre":"Producto prueba","precio":77}</code></td>
+            </tr>
+
+            <tr>
+              <td>PUT</td>
+              <td>/productos/:id</td>
+              <td>Actualiza un producto por ID</td>
+              <td><code>{"nombre":"Producto actualizado","precio":88}</code></td>
+            </tr>
+
+            <tr>
+              <td>DELETE</td>
+              <td>/productos/:id</td>
+              <td>Elimina un producto por ID</td>
+              <td><code>{"message":"Producto eliminado"}</code></td>
+            </tr>
+
+            <tr>
+              <td>GET</td>
+              <td>/categorias</td>
+              <td>Lista las categorías disponibles</td>
+              <td><code>[{"id":1,"name":"Tecnologia"}]</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Checklist de despliegue</h2>
+      <ul class="checklist">
+        <li>MongoDB Atlas configurado con clúster gratuito M0.</li>
+        <li>Usuario de base de datos creado con permisos de lectura y escritura.</li>
+        <li>Conectividad validada con MongoDB Compass.</li>
+        <li>Backend desplegado en Railway con variables de entorno.</li>
+        <li>Endpoint <code>/health</code> validado en producción.</li>
+        <li>CRUD de productos probado en producción.</li>
+        <li>Frontend desplegado en Netlify con <code>VITE_API_URL</code>.</li>
+        <li>CORS configurado para permitir el dominio público de Netlify.</li>
+        <li>Micrositio publicado en GitHub Pages desde <code>/docs</code>.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>MercApp - Unidad 4 | Aplicaciones Web | Universidad Politécnica Salesiana</p>
+  </footer>
+
+</body>
+</html>
